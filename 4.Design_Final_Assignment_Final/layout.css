@@ -207,7 +207,7 @@
 }
 .SearchBar_1{
 	background-color: ffffff;
-	width: 80%;
+	width: 90%;
 	min-height: 59px;
 	margin-top: 5px;
 }
@@ -245,7 +245,8 @@
 	background-image: url('UI_FILES/footer_background.png');
 	width:100%;
 	max-height: 450px;
-
+	position: absolute;
+	bottom: -450;
 }
 .About_me{
 	width:35%;
@@ -257,7 +258,7 @@
 	width: 25%;
 	position:relative;
 	margin-left: 50%;
-	top: -450;
+	top: -410;
 	left:-120;
 }
 
@@ -265,8 +266,22 @@
 	width: 26%;
 	position:relative;
 	margin-left: 50%;
-	top: -900;
+	top: -840;
 	left:230;
+}
+.Final_Icon{
+	width: 10%;
+	position:relative;
+	left:430;
+	top: -1188;
+	margin-top: 10px;
+}
+
+.Final_Icon_Whenever_Small{
+	width: 10%;
+	position:relative;
+	margin-left: 50%;
+	display:none;
 }
 @-webkit-keyframes fade {
   from {opacity: .4}
@@ -276,4 +291,119 @@
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+@media screen and (max-width: 939px){
+	.top_lower{
+	  position: relative;
+	  text-align: center;
+	  width: 90%;
+	}
+	.Main_Slider{
+	  width:75%;
+	  position: relative
+	}
+	.slideshow-container {
+	  width: 100%;
+	  position: relative;
+	  background: url(UI_FILES/button_background.png)
+	}
+	.prev, .next {
+	  cursor: pointer;
+	  position: absolute;
+	  top: 50%;
+	  width: auto;
+	  margin-top: -22px;
+	  padding: 16px;
+	  color: black;
+	  font-weight: bold;
+	  font-size: 10px;
+	  transition: 0.6s ease;
+	  border-radius: 0 3px 3px 0;
+	  user-select: none;
+	}
+	.Second_Slider{
+		width: 75%;
+	}
+	.left_part{
+		width: 70%;
+	}
+	/*
+	.Remaining_Four{
+		display: none;
+	}*/
+	.Right_part{
+		top:-3150;
+		width: 26%;
+		position: relative;
+		background-image: url(UI_FILES/entire_background.png);
+		/*float: right;*/
+		margin-right: 25%;
+		margin-left: 75%;
+	}
+	.Main_Buttom{
+		max-height:2500px;
+		width:100%
+	}
+	.container{
+		max-height:2500px;
+	}
+	.About_me{
+		display: none;
+
+	}
+
+	.LATEST_TWEET{
+		display: none;
+	}
+
+	.SUBSCRIBED{
+		display: none;
+	}
+	.Final_Icon{
+		display: none;
+	}
+
+	.Final_Icon_Whenever_Small{
+		display:inline-block;
+	}
+	.Footer{
+		background-image: url('UI_FILES/footer_background.png');
+		width:100%;
+		max-height: 450px;
+		position: absolute;
+		bottom:-150;
+	}
+}
+
+@media screen and (max-width: 853px){
+
+	.Right_part{
+		top:-1910;
+		width: 23%;
+		position: relative;
+		background-image: url(UI_FILES/entire_background.png);
+		/*float: right;*/
+		margin-right: 25%;
+		margin-left: 75%;
+		font-size: 10px;
+	}
+	.Footer{
+		background-image: url('UI_FILES/footer_background.png');
+		width:100%;
+		max-height: 450px;
+		position: absolute;
+		bottom:50;
+	}
+	.Main_Buttom{
+		max-height:1800px;
+		width:100%
+	}
+	.container{
+		max-height:1800px;
+	}
+
+	.Remaining_Four{
+		display: none;
+	}
+
 }

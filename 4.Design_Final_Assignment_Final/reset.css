@@ -1,0 +1,38 @@
+*{
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+	max-width: 58.625em;
+  max-height: 2500px;
+	margin:0 auto;
+	padding: 0em 2em;
+}
+.container_1{
+  background-image: url('UI_FILES/footer_background.png');
+	max-width: 58.625em;
+  max-height: 470px;
+	margin:0 auto;
+	padding: 0em 2em;
+}
+.clearfix:before, .clearfix:after{
+	content: "";
+	display: table;
+}
+.clearfix:after{
+	clear: both;
+}
+.cleared
+{
+  display:block;
+  clear: both;
+  float: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 0;
+  height:0;
+  overflow:hidden;
+}
