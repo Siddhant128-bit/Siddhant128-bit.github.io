@@ -9,7 +9,7 @@ var flag=0
 var random_position_1=0
 var random_position_2=0
 var id=null;
-//localStorage.setItem('high_score',0);
+localStorage.setItem('high_score',0);
 var high_score=localStorage.getItem('high_score');
 function begin_game()
 {
