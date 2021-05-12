@@ -128,6 +128,14 @@ for (var i=0; i<10; i++)
   var x=Math.random()*canvas.width;
   var y=Math.random()*canvas.height;
 
+  console.log(x, y);
+  if ((x>(canvas.width+40)) ||(x<=10) ||(y>=(canvas.hidth-40))||(y<=10))
+  {
+    x=-1500;
+    y=-1500
+  }
+
+
   var color_int=(Math.floor(Math.random()*(100-0)))
   var color=''
 

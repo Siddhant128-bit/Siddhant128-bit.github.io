@@ -1,0 +1,21 @@
+canvas{
+  padding: auto;
+  margin: auto;
+  display: block;
+  width:100%;
+  border: 1px solid black;
+}
+.Top_Score{
+  position: relative;
+  float:left;
+  width: 50%;
+  margin-top: 0;
+  font-size: 80px;
+}
+.Top_Score2{
+  position: relative;
+  float:right;
+  width: 50%;
+  margin-top: 0;
+  font-size: 80px;
+}
