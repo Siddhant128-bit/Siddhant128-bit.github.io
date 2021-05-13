@@ -1,0 +1,10 @@
+.Title{
+  display:block;
+  text-align: center;
+}
+
+canvas{
+  border: 3px solid Black;
+  display: block;
+  margin: 0 auto;
+}
