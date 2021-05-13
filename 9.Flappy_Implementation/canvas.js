@@ -1,8 +1,22 @@
+function entire_game(name){
 //---------------------------------------------variable and constant declaration here-------------------------------------------------------------------------------------------------------
+//console.log(a,b)
+//const axx = document.createElement("CANVAS");
+//axx.id=name
+//border: 3px solid Black;
+//axx.style.width='320px';
+//axx.style.height='480px';
+//x.style.display='block'
+//x.style.margin='auto';
+//margin: 0 auto;
+//document.body.appendChild(axx)
+var canvas=document.getElementById(name);
+console.log(canvas.height,canvas.width)
+//canvas.style.position='relative'
 
-const canvas=document.getElementById('can_mine');
+//testing for multiple instances
+
 const c=canvas.getContext('2d');
-
 let f=0;//for sprite animation
 const DEGREE=Math.PI/180; //multiply with any number gives the degree value radian to degree conversion formula.
 
@@ -344,3 +358,8 @@ function game(){ //Game will have all of the needed things and will be animating
 }
 
 game();
+//game2=new game;
+}
+entire_game('can_mine');
+entire_game('can_mine1');
+entire_game('can_mine2');
