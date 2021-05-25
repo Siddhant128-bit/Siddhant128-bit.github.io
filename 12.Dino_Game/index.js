@@ -490,11 +490,11 @@ function game_play()
     x1:1200,
     draw: function(){
       const background_image=new Image();
-      background_image.src='./assets/Background.png';
+      background_image.src='./Assets/Background.png';
       c.drawImage(background_image,this.x,this.y,this.w,this.h)
       c.drawImage(background_image,this.x+this.w,this.y,this.w,this.h)
       const background_image_cloud=new Image();
-      background_image_cloud.src='./assets/Cloud.png';
+      background_image_cloud.src='./Assets/Cloud.png';
       c.drawImage(background_image_cloud,this.x1,this.y-300,this.w-800,this.h);
     },
     update:function(){
