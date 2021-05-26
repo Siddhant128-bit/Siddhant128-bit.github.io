@@ -14,10 +14,29 @@ function game_play()
   const player_sprite=new Image();
   player_sprite.src='./Assets/dino_sprite.png'
 
+  const decrease=new Image();
+  decrease.src='./Assets/decrease_btn.png'
+
+  const increase=new Image();
+  increase.src='./Assets/increase_btn.png'
+
+  const decrease_hover=new Image();
+  decrease_hover.src='./Assets/decrease_btn_hover.png'
+
+
+  const increase_hover=new Image();
+  increase_hover.src='./Assets/increase_btn_hover.png'
+
   const sprite=new Image();
   sprite.src='./Assets/allsprite.png'
+
   const cactus_sprite=new Image();
   cactus_sprite.src='./Assets/cactus.png'
+
+  var hover_flag_decrease_first=0;
+  var hover_flag_decrease_second=0;
+  var hover_flag_increase_first=0;
+  var hover_flag_increase_second=0;
   var jump_modification=0;
   var jump_flag=0;
   var game_running=0;
@@ -26,6 +45,8 @@ function game_play()
   var random_weights_flag=0;
   var inside_player=0;
   var inside_AI=0;
+  var duck_flag=0;
+
 
 
 // These weights and bias have been calcuated by various observations as the weights that wil bring out best of NN fastest//
@@ -57,33 +78,53 @@ function game_play()
       var distance=0
       c.fillStyle='Transparent',
       c.fillRect(this.x,this.y,this.w,this.h)
-      if (this.frame==1)
-      {
-        distance=179
-      }
-      else if(this.frame==2)
-      {
-        distance=267
-      }
-      c.drawImage(player_sprite,dino.s_x+distance,dino.s_y,dino.s_x+85,dino.s_y+94,this.x,this.y+10,this.w,94);
 
-      //c.beginPath()
-      //this.z=this.y-this.h
+      if (duck_flag==1)
+      {
+        if (this.frame==1)
+        {
+          distance=2202;
+        }
+        else if(this.frame==2)
+        {
+          distance=2319;
+        }
+        else {
+          distance=2202;
+        }
+        c.drawImage(sprite,dino.s_x+distance,dino.s_y,dino.s_x+116,dino.s_y+94,this.x,342.25+10,this.w,94);
+      }
+      else {
+        if (this.frame==1)
+        {
+          distance=179
+        }
+        else if(this.frame==2)
+        {
+          distance=267
+        }
+        c.drawImage(player_sprite,dino.s_x+distance,dino.s_y,dino.s_x+85,dino.s_y+94,this.x,this.y+10,this.w,94);
+      }
+
     },
     jump: function(){
       if (this.y==342.25)
       {
         this.speed=-7
         jump_flag=1;
+        duck_flag=0;
         setTimeout(function(){jump_flag=0},1500)
       }
 
     },
     duck: function(){
+      //c.drawImage(player_sprite,150,150+85,150+94,10,this.y+10,this.w,94);
       if(this.h==100 && this.y==342.25)
       { jump_flag=0;
+        duck_flag=1
         this.h=this.h-120;
         this.y=this.y+100;
+        setTimeout(function(){duck_flag=0},900)
       }
     },
     update:function(){
@@ -155,6 +196,7 @@ function game_play()
   const score={
     best: parseInt(localStorage.getItem('best'))||0,
     value:0,
+    tracker:0,
     draw: function()
     {
       c.fillStyle='#FFF';
@@ -179,17 +221,17 @@ function game_play()
         c_Neural_Network.lineWidth = 2;
         c_Neural_Network.font = "25px Teko";
         //cactus display
-        c_Neural_Network.strokeText('w1: '+w1,canvas_Neural_Network.width-500,30);
-        c_Neural_Network.strokeText('w2: '+w2,canvas_Neural_Network.width-500,60);
-        c_Neural_Network.strokeText('b1: '+b,canvas_Neural_Network.width-500,90);
-        c_Neural_Network.strokeText('xc:  '+cactus_opponenet_1.x,canvas_Neural_Network.width-152,30)
-        c_Neural_Network.strokeText('dbc:  '+cactus_opponenet_1.dx,canvas_Neural_Network.width-152,60)
+        c_Neural_Network.strokeText('w1: '+w1,canvas_Neural_Network.width-600,30);
+        c_Neural_Network.strokeText('w2: '+w2,canvas_Neural_Network.width-600,60);
+        c_Neural_Network.strokeText('b1: '+b,canvas_Neural_Network.width-600,90);
+        c_Neural_Network.strokeText('xc:  '+cactus_opponenet_1.x,canvas_Neural_Network.width-320,30)
+        c_Neural_Network.strokeText('dxc:  '+cactus_opponenet_1.dx,canvas_Neural_Network.width-320,60)
         //bird display
-        c_Neural_Network.strokeText('w3: '+w3,canvas_Neural_Network.width-500,150);
-        c_Neural_Network.strokeText('w4: '+w4,canvas_Neural_Network.width-500,180);
-        c_Neural_Network.strokeText('b2:  '+b1,canvas_Neural_Network.width-500,210);
-        c_Neural_Network.strokeText('xb:  '+bird_opponenet_2.x,canvas_Neural_Network.width-152,150)
-        c_Neural_Network.strokeText('dbx:  '+bird_opponenet_2.dx,canvas_Neural_Network.width-152,180)
+        c_Neural_Network.strokeText('w3: '+w3,canvas_Neural_Network.width-600,150);
+        c_Neural_Network.strokeText('w4: '+w4,canvas_Neural_Network.width-600,180);
+        c_Neural_Network.strokeText('b2:  '+b1,canvas_Neural_Network.width-600,210);
+        c_Neural_Network.strokeText('xb:  '+bird_opponenet_2.x,canvas_Neural_Network.width-320,150)
+        c_Neural_Network.strokeText('dxb:  '+bird_opponenet_2.dx,canvas_Neural_Network.width-320,180)
         //how many gneration
         c_Neural_Network.fillText('Generation: '+generation,canvas_Neural_Network.width-1000,50);
         c_Neural_Network.strokeText('Generation: '+generation,canvas_Neural_Network.width-1000,50);
@@ -358,9 +400,47 @@ function game_play()
           c_Neural_Network.strokeText('Action: '+action_status,275,50+55*2);
 
         }
+        console.log(this.tracker)
+        if(this.value>=60)
+        {
+              c_Neural_Network.strokeText('cactus_velocity:            '+Math.floor(cactus_opponenet_1.dx),515,120)
+              if(hover_flag_decrease_first==1)
+              {
+                c_Neural_Network.drawImage(decrease_hover,680,90,50,50);
+              }
+              else {
+                c_Neural_Network.drawImage(decrease,680,90,50,50);
+
+              }
+              if(hover_flag_increase_first==1)
+              {
+
+                c_Neural_Network.drawImage(increase_hover,790,90,50,50);
+              }
+              else {
+                c_Neural_Network.drawImage(increase,790,90,50,50);
+              }
+        }
+        if(this.tracker>=40)
+        {
+              c_Neural_Network.strokeText('bird_velocity:             '+Math.floor(bird_opponenet_2.dx),530,180)
+              if(hover_flag_decrease_second==1)
+              {
+                  c_Neural_Network.drawImage(decrease_hover,680,150,50,50);
+              }
+              else {
+                c_Neural_Network.drawImage(decrease,680,150,50,50);
+              }
+              if(hover_flag_increase_second==1)
+              {
+                c_Neural_Network.drawImage(increase_hover,790,150,50,50);
+              }
+              else {
+                c_Neural_Network.drawImage(increase,790,150,50,50);
+              }
+        }
         c_Neural_Network.stroke();
         //
-
       }
     },
     reset: function()
@@ -369,7 +449,70 @@ function game_play()
     }
 
   }
+  //score part hover button
+  canvas_Neural_Network.addEventListener('mousemove',function(event)
+  {
+    let rect = canvas_Neural_Network.getBoundingClientRect();
+    let hoverx=event.clientX-rect.left;
+    let hovery=event.clientY-rect.top;
 
+    if(hoverx>=680&&hoverx<=680+50&&hovery>=90&&hovery<=90+50)
+    {
+      hover_flag_decrease_first=1;
+    }
+    else if(hoverx>=790&&hoverx<=790+50&&hovery>=90&&hovery<=90+50)
+    {
+      hover_flag_increase_first=1;
+    }
+    else if(hoverx>=680&&hoverx<=680+50&&hovery>=150&&hovery<=150+50)
+    {
+      hover_flag_decrease_second=1;
+    }
+    else if(hoverx>=790&&hoverx<=790+50&&hovery>=150&&hovery<=150+50)
+    {
+      hover_flag_increase_second=1;
+    }
+    else {
+      hover_flag_decrease_first=0;
+      hover_flag_decrease_second=0;
+      hover_flag_increase_first=0;
+      hover_flag_increase_second=0;
+    }
+  })
+  canvas_Neural_Network.addEventListener('click',function(event){
+    let rect = canvas_Neural_Network.getBoundingClientRect();
+    let clickX = event.clientX - rect.left;
+    let clickY = event.clientY - rect.top;
+    if(clickX>=680&&clickX<=680+50&&clickY>=90&&clickY<=90+50)
+    {
+      console.log("pressed here decrease cactus")
+      cactus_opponenet_1.dx-=1;
+      if (cactus_opponenet_1.dx<5)
+      {
+        cactus_opponenet_1.dx=5;
+      }
+    }
+    else if(clickX>=790&&clickX<=790+50&&clickY>=90&&clickY<=90+50)
+    {
+      console.log("pressed here increase cactus")
+      cactus_opponenet_1.dx+=1;
+    }
+    else if(clickX>=680&&clickX<=680+50&&clickY>=150&&clickY<=150+50)
+    {
+      console.log("pressed here decrease bird")
+      bird_opponenet_2.dx-=1;
+      if (bird_opponenet_2.dx<5)
+      {
+        bird_opponenet_2.dx=5;
+      }
+
+    }
+    else if(clickX>=790&&clickX<=790+50&&clickY>=150&&clickY<=150+50)
+    {
+      console.log("pressed here increase bird")
+      bird_opponenet_2.dx+=1;
+    }
+  })
   window.addEventListener('keydown',function(event){
     if (player_flag==1)
     {
@@ -464,6 +607,7 @@ function game_play()
         this.x=1300+Math.random()*(1020)
         this.dx=this.dx+Math.random()*(0.9)
         score.value+=10;
+        score.tracker+=10;
         score.best=Math.max(score.value,score.best);
         //score.best=0; //reset score here
         localStorage.setItem('best',score.best)
@@ -699,7 +843,6 @@ function game_play()
         b1=b1-0.25*slope_cost1*slope_prediction1;
 
       }
-    console.log('Trainning..')
     }
     //stopping condition for no overtrainning tested data.
     if(w1<=-0.60464)
@@ -732,7 +875,6 @@ function game_play()
       b1=1.326170266
     }
 
-    console.log(w1,w2,b,w3,w4,b1)
     collision_flag=0
     //there is a glitch with this timer thing i need to work on it
     setTimeout(function(){game()},3500);
@@ -755,7 +897,7 @@ function game_play()
 
     c.clearRect(0,0,canvas.width,canvas.height)
     c.fillStyle='LIGHTBLUE';
-    c.fillRect(0,0,canvas.width,canvas.height)
+    c.fillRect(0,0,440,canvas.height)
 
     c.beginPath();
     c.lineWidth = 10;
@@ -791,7 +933,6 @@ function game_play()
       w: 400,
       h: 150,
       draw: function(){
-        console.log(this.x,this.y,this.w,this.h)
         information.onload=function(){
           c.drawImage(information,15,360,400,150)
         }
@@ -960,7 +1101,7 @@ function game_play()
               player_information.onload=function transition()
               {
                   var id=requestAnimationFrame(transition)
-                  c.fillStyle='LIGHTBLUE';
+                  c.fillStyle='White';
                   var x=1500-i
                   c.fillRect(x-10,50,canvas.width,canvas.height)
                   c.drawImage(player_information,1500-i,50,500,400);
@@ -986,7 +1127,7 @@ function game_play()
               player_information.onload=function transition()
               {
                   var id=requestAnimationFrame(transition)
-                  c.fillStyle='LIGHTBLUE';
+                  c.fillStyle='White';
                   var x=1500-i
                   c.fillRect(x-10,50,canvas.width,canvas.height)
                   c.drawImage(player_information,1500-i,50,500,400);
@@ -1004,7 +1145,6 @@ function game_play()
             else if(clickX >= third_button.x && clickX <= third_button.x + third_button.w && clickY >= third_button.y && clickY <= third_button.y + third_button.h)
             {
 
-              console.log('Display information')
               const further_information=new Image();
               further_information.src='./Assets/further_information_info.png'
 
@@ -1018,7 +1158,7 @@ function game_play()
               further_information.onload=function transition()
               {
                   var id=requestAnimationFrame(transition)
-                  c.fillStyle='LIGHTBLUE';
+                  c.fillStyle='White';
                   var x=1500-i
                   c.fillRect(x-10,50,canvas.width,canvas.height)
                   c.drawImage(further_information,1500-i,50,500,400);
@@ -1064,7 +1204,6 @@ function game_play()
             {
               if(clickX >= forth_button.x && clickX <= forth_button.x + forth_button.w && clickY >= forth_button.y && clickY <= forth_button.y + forth_button.h)
               {
-                console.log('Begin Pressed')
                 game()
               }
             }
@@ -1072,7 +1211,6 @@ function game_play()
             {
               if(clickX >= forth_button.x && clickX <= forth_button.x + forth_button.w && clickY >= forth_button.y && clickY <= forth_button.y + forth_button.h)
               {
-                console.log('Begin Pressed')
                 game()
               }
             }
