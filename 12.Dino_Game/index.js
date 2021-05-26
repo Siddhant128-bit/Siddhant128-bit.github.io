@@ -902,13 +902,13 @@ function game_play()
     c.beginPath();
     c.lineWidth = 10;
     c.moveTo(15+420,40);
-    c.lineTo(15+420,500);
+    c.lineTo(15+420,510);
     c.stroke();
 
     c.beginPath();
     c.lineWidth = 8;
     c.moveTo(8,40);
-    c.lineTo(8,500);
+    c.lineTo(8,510);
     c.stroke();
 
     c.beginPath();
@@ -938,7 +938,7 @@ function game_play()
       x : 15,
       y : 200,
       w : 400,
-      h : 150,
+      h : 100,
       draw: function(){
         aI_start.onload=function(){
           c.drawImage(aI_start,15,200,400,100)
@@ -949,7 +949,7 @@ function game_play()
       x: 15,
       y: 360,
       w: 400,
-      h: 150,
+      h: 100,
       draw: function(){
         information.onload=function(){
           c.drawImage(information,15,360,400,100)
