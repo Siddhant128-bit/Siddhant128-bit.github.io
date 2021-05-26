@@ -896,13 +896,25 @@ function game_play()
     logo.src='./Assets/logo.png'
 
     c.clearRect(0,0,canvas.width,canvas.height)
-    c.fillStyle='LIGHTBLUE';
-    c.fillRect(0,0,440,canvas.height)
+    c.fillStyle='Black';
+    c.fillRect(15,40,410,470)
 
     c.beginPath();
     c.lineWidth = 10;
     c.moveTo(15+420,40);
     c.lineTo(15+420,500);
+    c.stroke();
+
+    c.beginPath();
+    c.lineWidth = 8;
+    c.moveTo(8,40);
+    c.lineTo(8,500);
+    c.stroke();
+
+    c.beginPath();
+    c.lineWidth = 10;
+    c.moveTo(10,520);
+    c.lineTo(430,520);
     c.stroke();
     const startBtn = {
         x : 15,
