@@ -916,15 +916,21 @@ function game_play()
     c.moveTo(10,520);
     c.lineTo(430,520);
     c.stroke();
+
+    c.beginPath();
+    c.lineWidth = 10;
+    c.moveTo(10,30);
+    c.lineTo(430,30);
+    c.stroke();
     const startBtn = {
         x : 15,
         y : 45,
         w : 400,
-        h : 150,
+        h : 100,
         draw: function(){
           player_start.onload=function()
           {
-            c.drawImage(player_start,15,45,400,150)
+            c.drawImage(player_start,15,45,400,100)
           }
         }
     }
@@ -935,7 +941,7 @@ function game_play()
       h : 150,
       draw: function(){
         aI_start.onload=function(){
-          c.drawImage(aI_start,15,200,400,150)
+          c.drawImage(aI_start,15,200,400,100)
         }
       }
     }
@@ -946,7 +952,7 @@ function game_play()
       h: 150,
       draw: function(){
         information.onload=function(){
-          c.drawImage(information,15,360,400,150)
+          c.drawImage(information,15,360,400,100)
         }
       }
     }
@@ -987,7 +993,7 @@ function game_play()
           player_start_hover.src='./Assets/startbtnhvr.png'
           player_start_hover.onload=function()
           {
-            c.drawImage(player_start_hover,15,45,400,150)
+            c.drawImage(player_start_hover,15,45,400,100)
           }
         }
         else if(hoverx >= aIStartBtn.x && hoverx <= aIStartBtn.x + aIStartBtn.w && hovery >= aIStartBtn.y && hovery <= aIStartBtn.y + aIStartBtn.h){
@@ -995,7 +1001,7 @@ function game_play()
           player_start_hover.src='./Assets/startbtn 1hover (2).png'
           player_start_hover.onload=function()
           {
-            c.drawImage(player_start_hover,15,200,400,150)
+            c.drawImage(player_start_hover,15,200,400,100)
           }
         }
         else if(hoverx >= third_button.x && hoverx <= third_button.x + third_button.w && hovery >= third_button.y && hovery <= third_button.y + third_button.h)
@@ -1004,7 +1010,7 @@ function game_play()
           player_start_hover.src='./Assets/startbtn 3hover.png'
           player_start_hover.onload=function()
           {
-            c.drawImage(player_start_hover,15,360,400,150)
+            c.drawImage(player_start_hover,15,360,400,100)
           }
         }
         else
@@ -1021,14 +1027,14 @@ function game_play()
 
           player_start.onload=function()
           {
-            c.drawImage(player_start,15,45,400,150)
+            c.drawImage(player_start,15,45,400,100)
           }
 
           aI_start.onload=function(){
-            c.drawImage(aI_start,15,200,400,150)
+            c.drawImage(aI_start,15,200,400,100)
           }
           information.onload=function(){
-            c.drawImage(information,15,360,400,150)
+            c.drawImage(information,15,360,400,100)
           }
 
         }
