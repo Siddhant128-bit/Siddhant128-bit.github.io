@@ -400,7 +400,6 @@ function game_play()
           c_Neural_Network.strokeText('Action: '+action_status,275,50+55*2);
 
         }
-        console.log(this.tracker)
         if(this.value>=60)
         {
               c_Neural_Network.strokeText('cactus_velocity:            '+Math.floor(cactus_opponenet_1.dx),515,120)
@@ -485,7 +484,6 @@ function game_play()
     let clickY = event.clientY - rect.top;
     if(clickX>=680&&clickX<=680+50&&clickY>=90&&clickY<=90+50)
     {
-      console.log("pressed here decrease cactus")
       cactus_opponenet_1.dx-=1;
       if (cactus_opponenet_1.dx<5)
       {
@@ -494,12 +492,10 @@ function game_play()
     }
     else if(clickX>=790&&clickX<=790+50&&clickY>=90&&clickY<=90+50)
     {
-      console.log("pressed here increase cactus")
       cactus_opponenet_1.dx+=1;
     }
     else if(clickX>=680&&clickX<=680+50&&clickY>=150&&clickY<=150+50)
     {
-      console.log("pressed here decrease bird")
       bird_opponenet_2.dx-=1;
       if (bird_opponenet_2.dx<5)
       {
@@ -509,7 +505,6 @@ function game_play()
     }
     else if(clickX>=790&&clickX<=790+50&&clickY>=150&&clickY<=150+50)
     {
-      console.log("pressed here increase bird")
       bird_opponenet_2.dx+=1;
     }
   })
@@ -897,47 +892,281 @@ function game_play()
 
     c.clearRect(0,0,canvas.width,canvas.height)
     c.fillStyle='Black';
-    c.fillRect(15,40,410,470)
+    c.fillRect(15,40,410,422)
 
 
     c.beginPath();
     c.lineWidth = 8;
     c.moveTo(15+420,40);
-    c.lineTo(15+420,510);
+    c.lineTo(15+420,460);
     c.stroke();
 
     c.beginPath();
     c.moveTo(8,40);
-    c.lineTo(8,510);
+    c.lineTo(8,460);
     c.stroke();
 
     c.beginPath();
-    c.moveTo(10,520);
-    c.lineTo(430,520);
+    c.moveTo(10,470);
+    c.lineTo(430,470);
     c.stroke();
 
     c.beginPath();
     c.moveTo(10,30);
     c.lineTo(430,30);
     c.stroke();
-    /*
+
+    var f_node_counter=0;
+    var s_node_counter=0;
+    var t_node_counter=0;
+    var f_node_flag=0;
+    var s_node_flag=0;
+    var t_node_flag=0;
+    var second_f_node_flag=0;
+    var second_s_node_flag=0;
+    var frame_1=0;
+    var distance=0;
     //buttom animation maybe
-    c.beginPath();
-    c.lineWidth=2;
-    c.arc(60, 565, 10, 0,Math.PI*2,false);
-    //c.fillStyle='RED'
-    c.stroke();
+    function  buttom_animation()
+    {
+      requestAnimationFrame(buttom_animation)
+      c.fillStyle='White';
+      c.fillRect(10,475,500,500)
+      c.lineWidth=2;
+      c.beginPath();
+      c.arc(60, 500, 10, 0,Math.PI*2,false);
 
-    c.beginPath();
-    c.arc(60, 540, 10, 0,Math.PI*2,false);
-    //c.fillStyle='RED'
-    c.stroke();
+      if (f_node_counter<=50)
+      {
+        c.fillStyle='White';
+        c.fill();
+        c.stroke();
+        f_node_flag=0;
+      }
+      else {
+        c.fillStyle='Red'
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(10,500)
+        c.lineTo(50,500)
+        c.stroke();
+        f_node_flag=1;
+      }
 
-    c.beginPath();
-    c.arc(60, 590, 10, 0,Math.PI*2,false);
-    //c.fillStyle='RED'
-    c.stroke();
-*/
+      c.beginPath();
+      c.arc(60, 540, 10, 0,Math.PI*2,false);
+      if(s_node_counter<=20)
+      {
+        c.fillStyle='White';
+        c.fill();
+        c.stroke();
+        s_node_flag=0;
+      }
+
+      else
+      {
+        c.fillStyle='Red'
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(10,540)
+        c.lineTo(50,540)
+        c.stroke();
+        s_node_flag=1;
+      }
+
+      c.beginPath();
+      c.arc(60, 580, 10, 0,Math.PI*2,false);
+
+      if(t_node_counter<=100)
+      {
+        c.fillStyle='White';
+        c.fill();
+        c.stroke();
+        t_node_flag=0;
+      }
+      else
+      {
+        c.fillStyle='Red'
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(10,580)
+        c.lineTo(50,580)
+        c.stroke();
+        t_node_flag=1;
+
+      }
+      c.stroke();
+
+      c.beginPath();
+      c.arc(100, 520, 10, 0,Math.PI*2,false);
+      if(f_node_flag==1 && s_node_flag==1)
+      {
+        c.fillStyle='RED';
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(70,505)
+        c.lineTo(90,520)
+        c.stroke();
+        c.beginPath();
+        c.moveTo(70,545)
+        c.lineTo(90,520)
+        c.stroke();
+        second_f_node_flag=1;
+      }
+      else
+      {
+        c.fillStyle='White';
+        c.fill();
+        c.stroke();
+        second_f_node_flag=0;
+      }
+      c.beginPath();
+      c.arc(100, 560, 10, 0,Math.PI*2,false);
+      if(t_node_flag==1 && s_node_flag==1)
+      {
+        c.fillStyle='RED';
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(70,545)
+        c.lineTo(90,560)
+        c.stroke();
+        c.beginPath();
+        c.moveTo(70,585)
+        c.lineTo(90,560)
+        c.stroke();
+        second_s_node_flag=1;
+      }
+      else {
+        c.fillStyle='White';
+        c.fill();
+        c.stroke();
+        second_s_node_flag=0;
+      }
+
+      c.beginPath();
+      c.arc(140, 540, 10, 0,Math.PI*2,false);
+      if(second_f_node_flag==1 && second_s_node_flag==0)
+      {
+        c.fillStyle='Blue';
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(108,520)
+        c.lineTo(130,540)
+        c.stroke();
+        if (frame_1<=20)
+        {
+          distance=179
+        }
+        else if(frame_1>=20)
+        {
+          distance=267
+        }
+        c.drawImage(player_sprite,distance,0,85,94,200,480,100,90);
+        c.beginPath()
+        c.moveTo(200,590)
+        c.lineTo(300,590)
+        c.stroke();
+      }
+      else if(second_s_node_flag==1 && second_f_node_flag==0)
+      {
+        c.fillStyle='Green';
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(108,560)
+        c.lineTo(130,540)
+        c.stroke();
+        if (frame_1<=20)
+        {
+          distance=2202;
+        }
+        else if(frame_1>=20)
+        {
+          distance=2319;
+        }
+        else
+        {
+          distance=2202;
+        }
+        c.drawImage(sprite,distance,0,116,94,200,500,100,94);
+        c.beginPath()
+        c.moveTo(200,590)
+        c.lineTo(300,590)
+        c.stroke();
+      }
+      else if(second_s_node_flag==1 && second_f_node_flag==1)
+      {
+        c.fillStyle='RED';
+        c.fill();
+        c.stroke();
+        c.beginPath();
+        c.moveTo(108,520)
+        c.lineTo(130,540)
+        c.stroke();
+        c.beginPath();
+        c.moveTo(108,560)
+        c.lineTo(130,540)
+        c.stroke();
+        if (frame_1<=20)
+        {
+          distance=179
+        }
+        else if(frame_1>=20)
+        {
+          distance=267
+        }
+        c.drawImage(player_sprite,distance,0,85,94,200,500,100,90);
+        c.beginPath()
+        c.moveTo(200,590)
+        c.lineTo(300,590)
+        c.stroke();
+      }
+      else {
+        c.fillStyle='White';
+        c.fill();
+        c.stroke();
+        //write trainning here
+        c.fillStyle='#FFF';
+        c.strokeStyle='#000';
+        c.lineWidth = 2;
+        c.font = "35px Teko";
+
+        c.fillText('Trainning',200,550);
+        c.strokeText('Trainning',200,550);
+      }
+
+      f_node_counter=f_node_counter+1;
+      s_node_counter+=1
+      t_node_counter+=1
+      frame_1+=1
+      if (f_node_counter>=150)
+      {
+        f_node_counter=0;
+      }
+      if(s_node_counter>=400)
+      {
+        s_node_counter=0;
+
+      }
+      if(t_node_counter>=500)
+      {
+        t_node_counter=0;
+        t_node_flag=0;
+      }
+      if(frame_1>=40)
+      {
+        frame_1=0;
+      }
+
+    }
+
+    buttom_animation()
 
     const startBtn = {
         x : 15,
