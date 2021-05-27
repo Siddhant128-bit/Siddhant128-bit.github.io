@@ -899,29 +899,46 @@ function game_play()
     c.fillStyle='Black';
     c.fillRect(15,40,410,470)
 
+
     c.beginPath();
-    c.lineWidth = 10;
+    c.lineWidth = 8;
     c.moveTo(15+420,40);
     c.lineTo(15+420,510);
     c.stroke();
 
     c.beginPath();
-    c.lineWidth = 8;
     c.moveTo(8,40);
     c.lineTo(8,510);
     c.stroke();
 
     c.beginPath();
-    c.lineWidth = 10;
     c.moveTo(10,520);
     c.lineTo(430,520);
     c.stroke();
 
     c.beginPath();
-    c.lineWidth = 10;
     c.moveTo(10,30);
     c.lineTo(430,30);
     c.stroke();
+    /*
+    //buttom animation maybe
+    c.beginPath();
+    c.lineWidth=2;
+    c.arc(60, 565, 10, 0,Math.PI*2,false);
+    //c.fillStyle='RED'
+    c.stroke();
+
+    c.beginPath();
+    c.arc(60, 540, 10, 0,Math.PI*2,false);
+    //c.fillStyle='RED'
+    c.stroke();
+
+    c.beginPath();
+    c.arc(60, 590, 10, 0,Math.PI*2,false);
+    //c.fillStyle='RED'
+    c.stroke();
+*/
+
     const startBtn = {
         x : 15,
         y : 45,
