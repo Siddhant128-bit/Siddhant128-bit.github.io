@@ -493,6 +493,10 @@ function game_play()
     else if(clickX>=790&&clickX<=790+50&&clickY>=90&&clickY<=90+50)
     {
       cactus_opponenet_1.dx+=1;
+      if (cactus_opponenet_1.dx>22)
+      {
+        cactus_opponenet_1.dx=22;
+      }
     }
     else if(clickX>=680&&clickX<=680+50&&clickY>=150&&clickY<=150+50)
     {
@@ -506,6 +510,10 @@ function game_play()
     else if(clickX>=790&&clickX<=790+50&&clickY>=150&&clickY<=150+50)
     {
       bird_opponenet_2.dx+=1;
+      if (bird_opponenet_2.dx>22)
+      {
+        bird_opponenet_2.dx=22;
+      }
     }
   })
   window.addEventListener('keydown',function(event){
@@ -1483,7 +1491,9 @@ function game_play()
           }
     })
   }
+
   Main_Menu();
+
 }
 
 game_play();
