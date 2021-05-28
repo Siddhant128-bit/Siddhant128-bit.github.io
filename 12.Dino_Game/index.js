@@ -709,7 +709,7 @@ function game_play()
       }
       else
       {
-        setTimeout(function(){location.reload()},200)
+        setTimeout(function(){location.reload()},50)
       }
     }
   }
@@ -1165,7 +1165,7 @@ function game_play()
       }
 
     }
-    buttom_animation
+    buttom_animation();
 
     const startBtn = {
         x : 15,
