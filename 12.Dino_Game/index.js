@@ -53,7 +53,7 @@ function game_play()
   var w1=-0.258758212 //weight altered so modifies itself while jumping
   var w2=1.316306957
   var b=0.3296589
-  var w3=-0.947508131656
+  var w3=0.0247508131656
   var w4=2.2871748221790544
   var b1=1.326170266108291
 
@@ -564,7 +564,7 @@ function game_play()
 
   const bird_opponenet_2={
     x:2500+Math.random()*(1020),
-    y: (canvas.height-300)+Math.random()*(20)+2,
+    y: (canvas.height-300),
     w: 60+Math.random()*10,
     h: 60,
     dx:5,
@@ -709,7 +709,7 @@ function game_play()
       }
       else
       {
-        setTimeout(function(){location.reload()},1000)
+        setTimeout(function(){location.reload()},200)
       }
     }
   }
@@ -1165,8 +1165,7 @@ function game_play()
       }
 
     }
-
-    buttom_animation()
+    buttom_animation
 
     const startBtn = {
         x : 15,
@@ -1457,7 +1456,7 @@ function game_play()
                  w1=-0.258758212 //weight altered so modifies itself while jumping
                  w2=1.316306957
                  b=0.3296589
-                 w3=-0.947508131656
+                 w3=0.0247508131656
                  w4=2.2871748221790544
                  b1=1.326170266108291
                  inside_information=0
