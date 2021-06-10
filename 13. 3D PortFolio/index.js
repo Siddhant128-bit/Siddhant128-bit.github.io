@@ -183,4 +183,7 @@ recognition.addEventListener('result',e=>{
 recognition.start();
 //voice feature till here
 */
+
+//zoom something i don't know if it works this one
+document.body.style.zoom = "100%";
 render();
