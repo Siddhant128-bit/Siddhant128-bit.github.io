@@ -1,4 +1,4 @@
-import * as THREE from '/node_modules/three/build/three.module.js' //importing three.js as THREE
+import * as THREE from './node_modules/three/build/three.module.js' //importing three.js as THREE
 
 var xc=window.innerWidth/2;
 var yc=window.innerWidth/2;
