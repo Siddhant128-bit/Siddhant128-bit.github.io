@@ -1,0 +1,12 @@
+.Title{
+  display:block;
+  text-align: center;
+}
+body{
+  margin:0;
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+}
