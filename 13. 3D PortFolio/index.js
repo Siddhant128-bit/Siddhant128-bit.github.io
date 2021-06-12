@@ -5,11 +5,11 @@ var yc=window.innerWidth/2;
 var scene = new THREE.Scene();
 var stop_flag=0;
 var hover_flag=0;
+var mic_click_flag=0;
 var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000)
 camera.position.z = 5;
 
-var renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setClearColor("#000030");
+var renderer = new THREE.WebGLRenderer({antialias: true,alpha: true});
 renderer.setSize(window.innerWidth,window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
@@ -41,6 +41,12 @@ loader.load( '/node_modules/three/examples/fonts/helvetiker_regular.typeface.jso
 		bevelSegments: 5
 	} );
 } );
+//adding voice feature;
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition =new SpeechRecognition();
+recognition.interimResults=true;
+
+let p=document.createElement('p');
 
 //Text addign End
 //setting up the cube on the screen
@@ -74,10 +80,10 @@ scene.add(light);
 //background rotating circle is here
 const geometry1 = new THREE.CircleGeometry( 4, 32 );
 const edges = new THREE.EdgesGeometry( geometry1 );
-const material2= new THREE.LineBasicMaterial( { color: 0x0000ff} )
+const material2= new THREE.LineBasicMaterial( { color: 0x00ffff} )
 const line = new THREE.LineSegments( edges,material2)
 scene.add( line );
-const material1 = new THREE.MeshBasicMaterial( { color: 0x000040 } );
+const material1 = new THREE.MeshPhongMaterial( {opacity: 0.5,color: 0x000030, transparent: true } );
 const circle = new THREE.Mesh( geometry1, material1 );
 scene.add( circle );
 
@@ -99,9 +105,7 @@ scene.add( circle2 );
 //animating the rotatin effect
 var render=function(){
   requestAnimationFrame(render);
-
   renderer.render(scene,camera);
-  (stop_flag)
   if (hover_flag==1)
   {
     circle2.material=new THREE.MeshLambertMaterial( {map: texturemic} );
@@ -125,24 +129,40 @@ var i=0;
 
 window.addEventListener("mousedown", event=>{
   clicked_flag=1;
+  console.log(window.innerWidth,window.innerHeight)
+  let clickX=event.clientX-100;
+  let clickY=event.clientY-110;
+  if(clickX>=1800 && clickX<=1950 && clickY>120 && clickY<=120+150)
+  {
+    console.log("Talk now ")
+    mic_click_flag=1;
+    recognition.start();
+  }
   //stop_flag=1;
 });
 
 window.addEventListener('mouseup', event=>{
   clicked_flag=0;
 })
+
+recognition.addEventListener('result',e=>{
+  const transcript=Array.from(e.results)
+    .map(result=>result[0])
+    .map(result=>result.transcript)
+    .join('')
+  p.textContent=transcript;
+  console.log(transcript);
+})
 window.addEventListener('mousemove',event=>{
   stop_flag=1;
   let hoverx=event.clientX-100;
   let hovery=event.clientY-110;
-  console.log(hoverx,hovery);
   if (hovery>25 && hovery<1050 && hoverx>150 && hoverx<=2000 )
   {
     stop_flag=1;
 
     if(hoverx>=1800 && hoverx<=1950 && hovery>120 && hovery<=120+150 )
      {
-       console.log('over the mic')
        hover_flag=1;
      }
      else {
@@ -170,20 +190,31 @@ window.addEventListener('mousemove',event=>{
     }
   }
 })
-/*//adding voice feature;
-window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const recognition =new SpeechRecognition();
-recognition.interimResults=true;
 
-let p=document.createElement('p');
 
-recognition.addEventListener('result',e=>{
-  console.log(e);
-})
-recognition.start();
+
+
+
 //voice feature till here
-*/
 
-//zoom something i don't know if it works this one
-document.body.style.zoom = "100%";
+
+//zoom adjusting one way or the other
+if(window.innerWidth>=4080 && window.innerHeight>=1971)
+{
+  document.body.style.zoom="117%"
+}
+else if(window.innerWidth<=2040 && window.innerHeight<=985)
+{
+  document.body.style.zoom="100-17%"
+}
+else if(window.innerWidth<=1813 && window.innerHeight<=876)
+{
+  document.body.style.zoom="100-17*2%"
+}
+else {
+
+  document.body.style.zoom = "100%";
+}
+window.innerWidth=2720;
+window.innerHeight=1314;
 render();

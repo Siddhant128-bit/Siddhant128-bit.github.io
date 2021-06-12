@@ -9,4 +9,7 @@ body{
 
 canvas {
   display: block;
+  background-image:url('Sides of Cube/background.gif');
+  background-repeat: no-repeat;
+  background-size: 2720px 1314px;
 }
